@@ -1,2 +1,3 @@
-# terraform-hcloud-server
-Terraform module for creating servers on Hetzner Cloud
+# Hetzner Cloud Server Terraform Module
+
+Terraform module for creating servers on Hetzner Cloud.
