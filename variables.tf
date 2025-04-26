@@ -1,3 +1,8 @@
+variable "datacenter" {
+  description = "The location of the server."
+  type        = string
+}
+
 variable "image" {
   description = "The OS image to create the server with."
   type        = string
@@ -7,11 +12,6 @@ variable "keep_disk" {
   description = "Whether to keep the size of the disk the same when upgrading the server type. If true, the server can be downgraded later."
   type        = bool
   default     = true
-}
-
-variable "location" {
-  description = "The location of the server."
-  type        = string
 }
 
 variable "name" {

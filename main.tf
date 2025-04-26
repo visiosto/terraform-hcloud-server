@@ -11,12 +11,16 @@ resource "hcloud_ssh_key" "this" {
   public_key = var.public_key
 }
 
+locals {
+  location = split(var.datacenter, "-")[0]
+}
+
 # TODO: Maybe support adding user-data (cloud-init).
 resource "hcloud_server" "this" {
   name        = local.resource_name
   server_type = var.server_type
   image       = var.image
-  location    = var.location
+  location    = local.location
   ssh_keys    = [hcloud_ssh_key.this]
   keep_disk   = var.keep_disk
 }
