@@ -23,11 +23,13 @@ No modules.
 
 ## Resources
 
-| Name               | Type     |
-| ------------------ | -------- |
-| hcloud_server.this | resource |
-| hcloud_ssh_key.ssh | resource |
-| random_uuid.this   | resource |
+| Name                   | Type     |
+| ---------------------- | -------- |
+| hcloud_primary_ip.ipv4 | resource |
+| hcloud_primary_ip.ipv6 | resource |
+| hcloud_server.this     | resource |
+| hcloud_ssh_key.ssh     | resource |
+| random_uuid.this       | resource |
 
 ## Inputs
 
