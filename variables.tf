@@ -3,6 +3,18 @@ variable "datacenter" {
   type        = string
 }
 
+variable "enable_ipv4" {
+  description = "Whether to create and attach a public IPv4 to the server."
+  type        = bool
+  default     = true
+}
+
+variable "enable_ipv6" {
+  description = "Whether to create and attach a public IPv6 to the server."
+  type        = bool
+  default     = true
+}
+
 variable "image" {
   description = "The OS image to create the server with."
   type        = string

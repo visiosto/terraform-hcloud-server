@@ -34,6 +34,8 @@ No modules.
 | Name        | Description                                                                                                                                   | Type     | Default | Required |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | :------: |
 | datacenter  | The location of the server. See [Hetzner documentation](https://docs.hetzner.com/cloud/general/locations/) for the data centers and locations | `string` | `""`    |   yes    |
+| enable_ipv4 | Whether to create and attach a public IPv4 to the server                                                                                      | `bool`   | `true`  |    no    |
+| enable_ipv6 | Whether to create and attach a public IPv6 to the server                                                                                      | `bool`   | `true`  |    no    |
 | image       | The OS image to create the server with                                                                                                        | `string` | `""`    |   yes    |
 | keep_disk   | Whether to keep the size of the disk the same when upgrading the server type. If true, the server can be downgraded later                     | `bool`   | `true`  |    no    |
 | name        | The name of the created server. If set, this overrides the default name that is created using the given prefix and a random ID                | `string` | `null`  |    no    |
