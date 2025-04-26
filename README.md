@@ -26,6 +26,8 @@ No modules.
 | Name               | Type     |
 | ------------------ | -------- |
 | hcloud_server.this | resource |
+| hcloud_ssh_key.ssh | resource |
+| random_uuid.this   | resource |
 
 ## Inputs
 
