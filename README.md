@@ -1,3 +1,44 @@
 # Hetzner Cloud Server Terraform Module
 
 Terraform module for creating servers on Hetzner Cloud.
+
+## Requirements
+
+| Name                | Version   |
+| ------------------- | --------- |
+| terraform           | >= 1.9.0  |
+| hetznercloud/hcloud | >= 1.50.0 |
+| hashicorp/random    | >= 3.0.0  |
+
+## Providers
+
+| Name                | Version   |
+| ------------------- | --------- |
+| hetznercloud/hcloud | >= 1.50.0 |
+| hashicorp/random    | >= 3.0.0  |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name               | Type     |
+| ------------------ | -------- |
+| hcloud_server.this | resource |
+
+## Inputs
+
+| Name        | Description                                                                                                                    | Type     | Default | Required |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------- | :------: |
+| image       | The OS image to create the server with                                                                                         | `string` | `""`    |   yes    |
+| location    | The location of the server                                                                                                     | `string` | `""`    |   yes    |
+| name        | The name of the created server. If set, this overrides the default name that is created using the given prefix and a random ID | `string` | `null`  |    no    |
+| name_prefix | The prefix to use in the automatically generated server name.                                                                  | `string` | `null`  |    no    |
+| public_key  | The public SSH key to add to the server                                                                                        | `string` | `""`    |   yes    |
+| server_type | The type of the server to create                                                                                               | `string` | `""`    |   yes    |
+| public_key  | The public SSH key to add to the server                                                                                        | `string` | `""`    |   yes    |
+
+## Outputs
+
+No outputs.
