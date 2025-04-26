@@ -32,6 +32,7 @@ No modules.
 | Name        | Description                                                                                                                    | Type     | Default | Required |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------- | :------: |
 | image       | The OS image to create the server with                                                                                         | `string` | `""`    |   yes    |
+| keep_disk   | Whether to keep the size of the disk the same when upgrading the server type. If true, the server can be downgraded later      | `bool`   | `true`  |    no    |
 | location    | The location of the server                                                                                                     | `string` | `""`    |   yes    |
 | name        | The name of the created server. If set, this overrides the default name that is created using the given prefix and a random ID | `string` | `null`  |    no    |
 | name_prefix | The prefix to use in the automatically generated server name.                                                                  | `string` | `null`  |    no    |

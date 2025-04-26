@@ -18,4 +18,5 @@ resource "hcloud_server" "this" {
   image       = var.image
   location    = var.location
   ssh_keys    = [hcloud_ssh_key.this]
+  keep_disk   = var.keep_disk
 }
