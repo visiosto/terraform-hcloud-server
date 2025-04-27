@@ -49,10 +49,10 @@ locals {
     direction = "in"
     protocol  = "tcp"
     port      = "80"
-    source_ips = [
+    source_ips = concat(
       var.enable_ipv4 ? ["0.0.0.0/0"] : [],
       var.enable_ipv6 ? ["::/0"] : [],
-    ]
+    )
   }
   firewall_rule_https = {
     direction = "in"
@@ -66,19 +66,19 @@ locals {
   firewall_rule_icmp = {
     direction = "in"
     protocol  = "icmp"
-    source_ips = [
+    source_ips = concat(
       var.enable_ipv4 ? ["0.0.0.0/0"] : [],
       var.enable_ipv6 ? ["::/0"] : [],
-    ]
+    )
   }
   firewall_rule_ssh = {
     direction = "in"
     protocol  = "tcp"
     port      = "22"
-    source_ips = [
+    source_ips = concat(
       var.enable_ipv4 ? ["0.0.0.0/0"] : [],
       var.enable_ipv6 ? ["::/0"] : [],
-    ]
+    )
   }
   firewall_rules = concat(
     var.allow_https_from_cloudflare ? [local.firewall_rule_cloudflare_https] : [],
