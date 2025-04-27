@@ -58,10 +58,10 @@ locals {
     direction = "in"
     protocol  = "tcp"
     port      = "443"
-    source_ips = [
+    source_ips = concat(
       var.enable_ipv4 ? ["0.0.0.0/0"] : [],
       var.enable_ipv6 ? ["::/0"] : [],
-    ]
+    )
   }
   firewall_rule_icmp = {
     direction = "in"
