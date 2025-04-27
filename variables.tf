@@ -1,17 +1,17 @@
 variable "allow_http" {
-  description = "Allow incoming HTTP traffic."
+  description = "Allow incoming HTTP traffic (ingress TCP traffic to port 80)."
   type        = bool
   default     = false
 }
 
 variable "allow_https" {
-  description = "Allow incoming HTTPS traffic."
+  description = "Allow incoming HTTPS traffic (ingress TCP traffic to port 443)."
   type        = bool
   default     = true
 }
 
 variable "allow_https_from_cloudflare" {
-  description = "Allow incoming HTTPS traffic from Cloudflare IP addresses."
+  description = "Allow incoming HTTPS traffic from Cloudflare IP addresses (ingress TCP traffic to port 443)."
   type        = bool
   default     = false
 }
@@ -23,7 +23,7 @@ variable "allow_icmp" {
 }
 
 variable "allow_ssh" {
-  description = "Allow incoming SSH traffic."
+  description = "Allow incoming SSH traffic (ingress TCP traffic to port 22)."
   type        = bool
   default     = false
 }
