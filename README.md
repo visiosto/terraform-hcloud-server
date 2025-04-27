@@ -60,4 +60,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name         | Description                                     |
+| ------------ | ----------------------------------------------- |
+| ipv4_address | The public IPv4 address attached to the server. |
+| ipv6_address | The public IPv6 address attached to the server. |
