@@ -66,6 +66,7 @@ locals {
   firewall_rule_icmp = {
     direction = "in"
     protocol  = "icmp"
+    port      = null
     source_ips = concat(
       var.enable_ipv4 ? ["0.0.0.0/0"] : [],
       var.enable_ipv6 ? ["::/0"] : [],
