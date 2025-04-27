@@ -3,7 +3,7 @@ resource "random_uuid" "this" {
 }
 
 locals {
-  resource_name = var.name != null ? "${var.name_prefix}-${replace(random_uuid.this[0].result, "-", "")}" : var.name
+  resource_name = var.name == null ? "${var.name_prefix}-${replace(random_uuid.this[0].result, "-", "")}" : var.name
 }
 
 # TODO: Should the module support adding multiple keys or omitting the key?
