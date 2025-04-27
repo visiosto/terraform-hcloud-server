@@ -32,19 +32,101 @@ resource "hcloud_primary_ip" "ipv6" {
   assignee_type = "server"
 }
 
+data "cloudflare_ip_ranges" "current" {
+}
+
+locals {
+  firewall_rule_cloudflare_https = {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "443"
+    source_ips = concat(
+      data.cloudflare_ip_ranges.current.ipv4_cidrs,
+      data.cloudflare_ip_ranges.current.ipv6_cidrs,
+    )
+  }
+  firewall_rule_http = {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "80"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+  firewall_rule_https = {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "443"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+  firewall_rule_icmp = {
+    direction = "in"
+    protocol  = "icmp"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+  firewall_rule_ssh = {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "22"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+  firewall_rules = concat(
+    var.allow_https_from_cloudflare ? [local.firewall_rule_cloudflare_https] : [],
+    var.allow_http ? [local.firewall_rule_http] : [],
+    var.allow_https ? [local.firewall_rule_https] : [],
+    var.allow_icmp ? [local.firewall_rule_icmp] : [],
+    var.allow_ssh ? [local.firewall_rule_ssh] : [],
+    [
+      for r in var.firewall_rules : {
+        direction       = r.direction != null ? r.directotion : "in"
+        protocol        = r.protocol != null ? r.protocol : "tcp"
+        port            = r.port
+        source_ips      = r.source_ips
+        destination_ips = r.destination_ips
+      }
+    ]
+  )
+}
+
+resource "hcloud_firewall" "this" {
+  name = local.resource_name
+
+  dynamic "rule" {
+    for_each = local.firewall_rules
+
+    content {
+      direction  = each.value.direction
+      protocol   = each.value.protocol
+      port       = each.value.port
+      source_ips = each.value.source_ips
+    }
+  }
+}
+
 locals {
   location = split(var.datacenter, "-")[0]
 }
 
 # TODO: Maybe support adding user-data (cloud-init).
 resource "hcloud_server" "this" {
-  name        = local.resource_name
-  server_type = var.server_type
-  image       = var.image
-  location    = local.location # TODO: Do we need the data center, too?
-  ssh_keys    = [hcloud_ssh_key.this]
-  keep_disk   = var.keep_disk
-  backups     = var.enable_backups
+  name         = local.resource_name
+  server_type  = var.server_type
+  image        = var.image
+  location     = local.location # TODO: Do we need the data center, too?
+  ssh_keys     = [hcloud_ssh_key.this.id]
+  keep_disk    = var.keep_disk
+  backups      = var.enable_backups
+  firewall_ids = [hcloud_firewall.this.id]
 
   public_net {
     ipv4_enabled = var.enable_ipv4

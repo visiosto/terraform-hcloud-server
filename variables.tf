@@ -1,3 +1,33 @@
+variable "allow_http" {
+  description = "Allow incoming HTTP traffic."
+  type        = bool
+  default     = false
+}
+
+variable "allow_https" {
+  description = "Allow incoming HTTPS traffic."
+  type        = bool
+  default     = true
+}
+
+variable "allow_https_from_cloudflare" {
+  description = "Allow incoming HTTPS traffic from Cloudflare IP addresses."
+  type        = bool
+  default     = false
+}
+
+variable "allow_icmp" {
+  description = "Allow incoming ICMP traffic."
+  type        = bool
+  default     = true
+}
+
+variable "allow_ssh" {
+  description = "Allow incoming SSH traffic."
+  type        = bool
+  default     = false
+}
+
 variable "datacenter" {
   description = "The location of the server."
   type        = string
@@ -19,6 +49,18 @@ variable "enable_ipv6" {
   description = "Whether to create and attach a public IPv6 to the server."
   type        = bool
   default     = true
+}
+
+variable "firewall_rules" {
+  description = "Custom firewall rules for the server firewall. If the direction is omitted, ingress (`in`) is used by default. If the protocol is omitted, TCP is used by default. The most common rules can also be applied by using the `allow_*` input variables."
+  type = list(object({
+    direction       = optional(string)
+    protocol        = optional(string)
+    port            = optional(string)
+    source_ips      = optional(list(string))
+    destination_ips = optional(list(string))
+  }))
+  default = []
 }
 
 variable "image" {

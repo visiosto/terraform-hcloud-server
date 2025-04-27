@@ -4,18 +4,20 @@ Terraform module for creating servers on Hetzner Cloud.
 
 ## Requirements
 
-| Name                | Version   |
-| ------------------- | --------- |
-| terraform           | >= 1.9.0  |
-| hetznercloud/hcloud | >= 1.50.0 |
-| hashicorp/random    | >= 3.0.0  |
+| Name                  | Version   |
+| --------------------- | --------- |
+| terraform             | >= 1.9.0  |
+| cloudflare/cloudflare | >= 5.0.0  |
+| hetznercloud/hcloud   | >= 1.50.0 |
+| hashicorp/random      | >= 3.0.0  |
 
 ## Providers
 
-| Name                | Version   |
-| ------------------- | --------- |
-| hetznercloud/hcloud | >= 1.50.0 |
-| hashicorp/random    | >= 3.0.0  |
+| Name                  | Version   |
+| --------------------- | --------- |
+| cloudflare/cloudflare | >= 5.0.0  |
+| hetznercloud/hcloud   | >= 1.50.0 |
+| hashicorp/random      | >= 3.0.0  |
 
 ## Modules
 
