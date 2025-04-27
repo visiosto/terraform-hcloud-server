@@ -1,6 +1,8 @@
 # Hetzner Cloud Server Terraform Module
 
-Terraform module for creating servers on Hetzner Cloud.
+Terraform module for creating servers on Hetzner Cloud. Additionally, it
+includes an option to enable a firewall rule to only allow ingress HTTPS traffic
+from Cloudflare IP addresses.
 
 ## Requirements
 
