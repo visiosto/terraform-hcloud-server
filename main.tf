@@ -105,10 +105,10 @@ resource "hcloud_firewall" "this" {
     for_each = local.firewall_rules
 
     content {
-      direction  = each.value.direction
-      protocol   = each.value.protocol
-      port       = each.value.port
-      source_ips = each.value.source_ips
+      direction  = rule.value.direction
+      protocol   = rule.value.protocol
+      port       = rule.value.port
+      source_ips = rule.value.source_ips
     }
   }
 }
