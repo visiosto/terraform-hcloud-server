@@ -41,9 +41,10 @@ resource "hcloud_server" "this" {
   name        = local.resource_name
   server_type = var.server_type
   image       = var.image
-  location    = local.location
+  location    = local.location # TODO: Do we need the data center, too?
   ssh_keys    = [hcloud_ssh_key.this]
   keep_disk   = var.keep_disk
+  backups     = var.enable_backups
 
   public_net {
     ipv4_enabled = var.enable_ipv4

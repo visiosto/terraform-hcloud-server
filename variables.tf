@@ -3,6 +3,12 @@ variable "datacenter" {
   type        = string
 }
 
+variable "enable_backups" {
+  description = "Whether to enable backups for the server."
+  type        = bool
+  default     = false
+}
+
 variable "enable_ipv4" {
   description = "Whether to create and attach a public IPv4 to the server."
   type        = bool
