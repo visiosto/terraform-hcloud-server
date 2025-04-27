@@ -1,5 +1,5 @@
 resource "random_uuid" "this" {
-  count = var.name != null ? 1 : 0
+  count = var.name == null ? 1 : 0
 }
 
 locals {
