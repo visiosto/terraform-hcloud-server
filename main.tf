@@ -41,8 +41,8 @@ locals {
     protocol  = "tcp"
     port      = "443"
     source_ips = concat(
-      data.cloudflare_ip_ranges.current.ipv4_cidrs,
-      data.cloudflare_ip_ranges.current.ipv6_cidrs,
+      var.enable_ipv4 ? data.cloudflare_ip_ranges.current.ipv4_cidrs : [],
+      var.enable_ipv6 ? data.cloudflare_ip_ranges.current.ipv6_cidrs : [],
     )
   }
   firewall_rule_http = {
@@ -50,8 +50,8 @@ locals {
     protocol  = "tcp"
     port      = "80"
     source_ips = [
-      "0.0.0.0/0",
-      "::/0"
+      var.enable_ipv4 ? ["0.0.0.0/0"] : [],
+      var.enable_ipv6 ? ["::/0"] : [],
     ]
   }
   firewall_rule_https = {
@@ -59,16 +59,16 @@ locals {
     protocol  = "tcp"
     port      = "443"
     source_ips = [
-      "0.0.0.0/0",
-      "::/0"
+      var.enable_ipv4 ? ["0.0.0.0/0"] : [],
+      var.enable_ipv6 ? ["::/0"] : [],
     ]
   }
   firewall_rule_icmp = {
     direction = "in"
     protocol  = "icmp"
     source_ips = [
-      "0.0.0.0/0",
-      "::/0"
+      var.enable_ipv4 ? ["0.0.0.0/0"] : [],
+      var.enable_ipv6 ? ["::/0"] : [],
     ]
   }
   firewall_rule_ssh = {
@@ -76,8 +76,8 @@ locals {
     protocol  = "tcp"
     port      = "22"
     source_ips = [
-      "0.0.0.0/0",
-      "::/0"
+      var.enable_ipv4 ? ["0.0.0.0/0"] : [],
+      var.enable_ipv6 ? ["::/0"] : [],
     ]
   }
   firewall_rules = concat(
