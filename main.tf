@@ -114,16 +114,12 @@ resource "hcloud_firewall" "this" {
   }
 }
 
-locals {
-  location = split(var.datacenter, "-")[0]
-}
-
 # TODO: Maybe support adding user-data (cloud-init).
 resource "hcloud_server" "this" {
   name         = local.resource_name
   server_type  = var.server_type
   image        = var.image
-  location     = local.location # TODO: Do we need the data center, too?
+  datacenter   = var.datacenter
   ssh_keys     = [hcloud_ssh_key.this.id]
   keep_disk    = var.keep_disk
   backups      = var.enable_backups
